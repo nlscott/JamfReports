@@ -24,11 +24,11 @@ module JamfReports
         $tokenExpirationEpoch=Time.parse($tokenExpiration).to_i
 
         ### SANITY CHECK
-        puts "Token granted"
-        puts "#{$bearerToken}"
+        # puts "Token granted"
+        # puts "#{$bearerToken}"
     end
 
-    def checkTokenExpiration
+    def self.checkTokenExpiration
         #check if token is valid
 
         current_time= Time.now.to_i
@@ -44,7 +44,7 @@ module JamfReports
         end
     end
 
-    def invalidateToken
+    def self.invalidateToken
         #revoke token
         url = URI("#{$jamfpro_url}/api/v1/auth/invalidate-token")
         https = Net::HTTP.new(url.host, url.port)
@@ -66,7 +66,7 @@ module JamfReports
 
 
 
-    def getAllApplicationInventory
+    def self.getAllApplicationInventory
         #this is the main function
         #loops through all computers inventory and only looks at Applications section
         $applicationHash = Hash.new(0)
@@ -89,7 +89,7 @@ module JamfReports
     end
 
 
-    def listAllInstalledApps
+    def self.listAllInstalledApps
         # Prints back report sorty by most installed apps to least
         $applicationHash.sort_by {|_key, value| value}.reverse.each do |k,v|
             puts " #{k} = #{v}"
@@ -97,7 +97,7 @@ module JamfReports
     end
 
 
-    def totalNumberOfOneInstalledApps
+    def self.totalNumberOfOneInstalledApps
         #prints the total number of apps that have been installed once
         @oneOffApps = Hash.new
         $applicationHash.each do |name, count|
@@ -110,7 +110,7 @@ module JamfReports
     end
 
 
-    def listofOneInstallApps
+    def self.listofOneInstallApps
         #prints list of all apps by name that have been installed once
         @oneInstalledApps = Hash.new
         $applicationHash.each do |name, count|
@@ -123,7 +123,7 @@ module JamfReports
     end
 
 
-    def webBrowserReport
+    def self.webBrowserReport
         #reports back on how many installs of these browsers there are
         $webBroswerArray = [
             "Google Chrome.app",
