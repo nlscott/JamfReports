@@ -6,7 +6,7 @@ JamfReports is a ruby gem that uses the Jamf Pro API for hosted instances. Curre
 
 Future reports may be added.
 
-
+---
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -23,6 +23,7 @@ Or install it yourself as:
 
     $ gem install JamfReports
 
+---
 ## Usage
 
 In order to run JamfReports, you are required to add these two lines to the top of your file, under the require `JamfReports` line
@@ -78,11 +79,7 @@ JamfReports.invalidateToken
 ```
 
 
-
-
-
-For more usage and examples see this blog post
-
+---
 ## Examples
 
 #### listAllInstalledApps
@@ -120,7 +117,7 @@ Returns a single metric to show the number of "One-off" or single installed apps
 Returns a list of all the "One-off" or single installed apps across your fleet. This can be helpful in scoping in Jamf uninstall policies.
 
 
-
+---
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
