@@ -149,5 +149,17 @@ module JamfReports
             end
         end
     end
+
+    def self.exportAllInstalledAppsCSV
+        $currentUser=Etc.getlogin
+        reportName="Installed Applications Report"
+        $reportPath="/Users/#{$currentUser}/Desktop/#{reportName}.csv"
+        File.write("#{$reportPath}", "name,count\n")
+        
+        $applicationHash.sort_by {|_key, value| value}.reverse.each do |k,v|
+            open("#{$reportPath}", "a") { |f| f << "#{k},#{v}\n" } 
+        end
+    end
+
     
 end

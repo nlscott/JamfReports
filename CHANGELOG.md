@@ -1,3 +1,5 @@
+## 0.2.0 (2023.06.29)
+- Add: export results to csv
 
 ## 0.1.1 (2023.06.28)
 - Update: update module syntax
