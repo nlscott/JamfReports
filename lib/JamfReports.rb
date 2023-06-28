@@ -9,7 +9,7 @@ require "fileutils"
 module JamfReports
     class Error < StandardError; end
   
-    def getToken
+    def self.getToken
         #request New token
         url = URI("#{$jamfpro_url}/api//v1/auth/token")
         https = Net::HTTP.new(url.host, url.port)
@@ -24,7 +24,8 @@ module JamfReports
         $tokenExpirationEpoch=Time.parse($tokenExpiration).to_i
 
         ### SANITY CHECK
-        # puts "Token granted"
+        puts "Token granted"
+        puts "#{$bearerToken}"
     end
 
     def checkTokenExpiration
