@@ -151,7 +151,8 @@ module JamfReports
     end
 
     def self.exportAllInstalledAppsCSV
-        $currentUser=Etc.getlogin
+        # $currentUser=Etc.getlogin
+        $currentUser=ENV[‘USER’] 
         reportName="Installed Applications Report"
         $reportPath="/Users/#{$currentUser}/Desktop/#{reportName}.csv"
         File.write("#{$reportPath}", "name,count\n")
