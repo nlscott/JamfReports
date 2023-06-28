@@ -1,8 +1,11 @@
 # JamfReports
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/JamfReports`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Summary
 
-TODO: Delete this and the text above, and describe your gem
+JamfReports is a ruby gem that uses the Jamf Pro API for hosted instances. Currently, it only reports on Applications. Pulling from the `/api/v1/computers-inventory?section=APPLICATIONS` endpoint.
+
+Future reports may be added.
+
 
 ## Installation
 
@@ -22,17 +25,101 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+In order to run JamfReports, you are required to add these two lines to the top of your file, under the require `JamfReports` line
 
-## Development
+```ruby
+#!/usr/bin/ruby
+require "JamfReports"
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+## UPDATE THESE VARIABLES ------------------------------------------------------
+$jamfpro_url = "https://company.jamfcloud.com" 
+$api_pw = "Your API KEY HERE"
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+ If you don't have your api key for the `$api_pw` variable, run this command to create it and paste it into the variable.
 
-## Contributing
+```bash
+printf "jamfUserName:JamfPassword" | iconv -t ISO-8859-1 | base64 -i -
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/JamfReports.
+
+
+And these 3 lines to generate the api token and pull the data from Jamf so you can run the report commands.
+
+```ruby
+JamfReports.getToken
+JamfReports.checkTokenExpiration
+JamfReports.getAllApplicationInventory
+```
+
+A full working file might look like this.
+
+```ruby
+#!/usr/bin/ruby
+require "JamfReports"
+
+## UPDATE THESE VARIABLES ------------------------------------------------------
+$jamfpro_url = "https://company.jamfcloud.com" 
+$api_pw = "Your API KEY HERE"
+
+## COMMANDS --------------------------------------------------------------------
+JamfReports.getToken
+JamfReports.checkTokenExpiration
+JamfReports.getAllApplicationInventory
+
+## REPORTS --------------------------------------------------------------------
+JamfReports.listAllInstalledApps
+# JamfReports.webBrowserReport
+# JamfReports.totalNumberOfOneInstalledApps
+# JamfReports.listofOneInstallApps
+
+## After reporting, revoke current token
+JamfReports.invalidateToken
+```
+
+
+
+
+
+For more usage and examples see this blog post
+
+## Examples
+
+#### listAllInstalledApps
+
+![listAllInstalledApps](images/listAllInstalledApps.png)
+
+Returns a sorted list of all apps installed across your fleet of computers in Jamf. Sorted from most installed app, to least.
+
+#### webBrowserReport
+![webBrowserReport](images/webBrowserReport.png)
+Returns a list of installed web browsers. Current browsers searched are:
+- Google Chrome.app
+- Google Chrome Canary.app
+- Firefox.app
+- Firefox Developer Edition.app
+- Safari.app
+- Safari Technology Preview.app
+- Microsoft Edge.app
+- Brave Browser.app
+- Arc.app
+- Opera.app
+- LinCastor Browser.app
+- LockDown Browser.app
+- Tor Browser.app
+- Vivaldi.app
+- DuckDuckGo.app
+
+#### totalNumberOfOneInstalledApps
+![totalNumberOfOneInstalledApps](images/totalNumberOfOneInstalledApps.png)
+Returns a single metric to show the number of "One-off" or single installed apps across your fleet.
+
+#### listofOneInstallApps
+![listofOneInstallApps](images/listofOneInstallApps.png)
+
+Returns a list of all the "One-off" or single installed apps across your fleet. This can be helpful in scoping in Jamf uninstall policies.
+
+
 
 ## License
 
