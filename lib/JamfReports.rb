@@ -1,5 +1,6 @@
 require "JamfReports/version"
 require "uri"
+require 'etc'
 require "json"
 require "time"
 require "net/http"
@@ -150,9 +151,8 @@ module JamfReports
         end
     end
 
-    def self.exportAllInstalledAppsCSV
-        # $currentUser=Etc.getlogin
-        $currentUser=ENV[‘USER’] 
+    def self.listAllInstalledApps_exporttocsv
+        $currentUser=Etc.getlogin
         reportName="Installed Applications Report"
         $reportPath="/Users/#{$currentUser}/Desktop/#{reportName}.csv"
         File.write("#{$reportPath}", "name,count\n")

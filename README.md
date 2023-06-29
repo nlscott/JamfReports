@@ -117,6 +117,14 @@ Returns a single metric to show the number of "One-off" or single installed apps
 Returns a list of all the "One-off" or single installed apps across your fleet. This can be helpful in scoping in Jamf uninstall policies.
 
 
+#### listAllInstalledApps_exporttocsv
+![listAllInstalledApps_exporttocsv](images/listAllInstalledApps_exporttocsv.png)
+Using `JamfReports.listAllInstalledApps_exporttocsv` exports the results to the users desktop as a csv file named `Installed Applications Report.csv`
+
+
+
+
+
 ---
 ## License
 
