@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["nls.inbox@gmail.com"]
 
   spec.summary       = %q{A gem that uses the Jamf Pro API to generate reports for hosted Jamf Pro instance}
-  spec.homepage      = "https://github.com/nlscott/marshmallow"
+  spec.homepage      = "https://github.com/nlscott/JamfReports"
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.
